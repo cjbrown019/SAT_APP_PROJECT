@@ -20,4 +20,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SAT_APP_PROJECT.DATA.EF\SAT_APP_PROJECT.DATA.EF.csproj" />
+  </ItemGroup>
+
 </Project>
