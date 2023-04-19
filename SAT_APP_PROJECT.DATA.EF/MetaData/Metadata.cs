@@ -16,9 +16,9 @@ namespace SAT_APP_PROJECT.DATA.EF.Models
         public string LastName { get; set; }
         [StringLength(15, ErrorMessage = "Maximum 15 characters"), DisplayFormat(NullDisplayText ="Undeclared")]
         public string Major { get; set; }
-        [StringLength(50, ErrorMessage = "Maximum 50 characters"), DisplayFormat(NullDisplayText = "N/A"]
+        [StringLength(50, ErrorMessage = "Maximum 50 characters"), DisplayFormat(NullDisplayText = "N/A")]
         public string Address { get; set; }
-        [StringLength(25, ErrorMessage = "Maximum 25 characters"),, DisplayFormat(NullDisplayText = "N/A"]
+        [StringLength(25, ErrorMessage = "Maximum 25 characters"), DisplayFormat(NullDisplayText = "N/A")]
         public string City { get; set; }
         [StringLength(2, ErrorMessage = "Maximum 2 characters"), DisplayFormat(NullDisplayText = "N/A")]
         public string State { get; set; }

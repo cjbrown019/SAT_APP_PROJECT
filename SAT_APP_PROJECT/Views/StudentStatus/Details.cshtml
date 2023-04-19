@@ -1,0 +1,30 @@
+﻿@model SAT_APP_PROJECT.DATA.EF.Models.StudentStatus
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>StudentStatus</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ssname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ssname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ssdescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ssdescription)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Ssid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
