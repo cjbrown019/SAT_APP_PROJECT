@@ -44,15 +44,33 @@
         <ul>
           <li><a class="" asp-action="Index" asp-controller="Home">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a asp-action="Index" asp-controller="Courses">Courses</a></li>
+          @if (User.IsInRole("Admin") || User.IsInRole("Scheduler"))
+          {
+          <li><a asp-action="Index" asp-controller="Enrollments">Enrollments</a></li>
+          <li><a asp-action="Index" asp-controller="Students">Students</a></li>
+          <li><a asp-action="Index" asp-controller="ScheduledClasses">Scheduled Classes</a></li>
+          }
+          @if (User.IsInRole("Admin"))
+          {
+              <li><a asp-action="Index" asp-controller="Courses">Courses</a></li>
+              <li><a asp-action="Index" asp-controller="StudentStatus">Student Statuses</a></li>
+              <li><a asp-action="Index" asp-controller="ScheduledClassStatus">Class Statuses</a></li>
+
+          }
+          
+
+          
 
           @* TEMPLATE NAVBAR ITEMS *@
           @*<li><a href="trainers.html">Trainers</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="pricing.html">Pricing</a></li>*@
 
-           <li>
-          <partial name="_LoginPartial" />
+           <li class="dropdown">
+               <a href="#">
+                   <span>Account</span><i class="bi bi-chevron-down"></i>
+               </a>
+            <partial name="_LoginPartial" />
 
            </li>
          

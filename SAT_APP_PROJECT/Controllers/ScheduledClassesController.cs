@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ using SAT_APP_PROJECT.DATA.EF.Models;
 
 namespace SAT_APP_PROJECT.MVC.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class ScheduledClassesController : Controller
     {
         private readonly SATContext _context;
