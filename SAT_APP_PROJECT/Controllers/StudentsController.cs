@@ -7,21 +7,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SAT_APP_PROJECT.DATA.EF.Models;
+using Microsoft.AspNetCore.Hosting;//added for FUP
 
 namespace SAT_APP_PROJECT.MVC.UI.Controllers
 {
     [Authorize(Roles = "Admin")]
-
     public class StudentsController : Controller
     {
         private readonly SATContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;//added for FUP
 
-        public StudentsController(SATContext context)
+
+        public StudentsController(SATContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;//added for FUP
         }
-        [Authorize(Roles = "Scheduler")]
-
+        [Authorize(Roles = "Admin, Scheduler")]
         // GET: Students
         public async Task<IActionResult> Index()
         {
@@ -30,8 +32,7 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: Students/Details/5
-        [Authorize(Roles = "Scheduler")]
-
+        [Authorize(Roles = "Admin, Scheduler")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Students == null)
@@ -62,10 +63,44 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentId,FirstName,LastName,Major,Address,City,State,ZipCode,Phone,Email,PhotoUrl,Ssid")] Student student)
+        public async Task<IActionResult> Create([Bind("StudentId,FirstName,LastName,Major,Address,City,State,ZipCode,Phone,Email,PhotoUrl,Ssid, Image")] Student student)//added Image property for our webhostenvironment object (image file)
         {
             if (ModelState.IsValid)
             {
+                #region File Upload - CREATE
+                if (student.Image != null)//file exists, process it
+                {
+                    //check file type & get the extension to use in my new unique random filename
+                    string ext = Path.GetExtension(student.Image.FileName).ToLower();
+
+                    //create list of valid extensions
+                    string[] validExts = { ".jpg", ".jpeg", ".png" };//NO GIFS for official student photos!
+
+                    //-verify the uploaded file is OK ext & that file doesn't exceed .NET max
+                    if (validExts.Contains(ext) && student.Image.Length < 4_194_303)//hard-coded max file size in bytes 
+                    {
+                        //generate a guid filename
+                        student.PhotoUrl = Guid.NewGuid() + ext;
+
+                        //save the file to webserver
+                        string webRootPath = _webHostEnvironment.WebRootPath;
+                        string fullImagePath = webRootPath + "/img/students/";
+
+                        //create a MemoryStream object to read image into server memory
+                        //TODO: FINISH THIS FUNCTIONALY FOR CONTROLLER POST CREATE ACTION ON FUPload
+
+
+                    }
+                    else // file was incorrect ext or too big
+                    {
+                        //If no image assign the default filename
+                        student.PhotoUrl = "noimage.jpg";
+                    }
+
+                }
+
+                #endregion
+
                 _context.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

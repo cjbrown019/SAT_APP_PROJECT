@@ -11,7 +11,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace SAT_APP_PROJECT.DATA.EF.Models
 {
     [ModelMetadataType(typeof(StudentsMetadata))]
-    public partial class Student { }
+    public partial class Student
+    {
+        [NotMapped]
+        public IFormFile? Image { get; set; }//for file upload
+
+        //optional readonly property to show fullname
+        public string FullName { get { return FirstName + " " + LastName; } }
+    }
+
+
+
     [ModelMetadataType(typeof(CourseMetadata))]
     public partial class Course { }
     [ModelMetadataType(typeof(ScheduledClassStatusesMetadata))]

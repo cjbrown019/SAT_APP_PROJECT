@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data"> @*Updated the form to accept file uploads*@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -59,7 +59,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="PhotoUrl" class="control-label"></label>
-                <input asp-for="PhotoUrl" class="form-control" />
+                @*REPLACE the textbox with a FUP control
+                <input asp-for="PhotoUrl" class="form-control" />*@
+                <input type="file" asp-for="Image" class="form" />
                 <span asp-validation-for="PhotoUrl" class="text-danger"></span>
             </div>
             <div class="form-group">

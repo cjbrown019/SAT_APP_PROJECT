@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -28,8 +29,11 @@ namespace SAT_APP_PROJECT.DATA.EF.Models
         public string Phone { get; set; }
         [StringLength(60, ErrorMessage = "Maximum 60 characters"), Required(ErrorMessage = "*Required"), EmailAddress(ErrorMessage ="Please enter a VALID email")]
         public string Email { get; set; }
+
         [StringLength(100)]
+        [DisplayName("Image")]//looks better on labels
         public string PhotoUrl { get; set; }
+
         //Student Statuses key
         public int SSID { get; set; }
 
