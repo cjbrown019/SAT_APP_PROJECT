@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ using SAT_APP_PROJECT.DATA.EF.Models;
 
 namespace SAT_APP_PROJECT.MVC.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class ScheduledClassStatusController : Controller
     {
         private readonly SATContext _context;
@@ -19,6 +22,8 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: ScheduledClassStatus
+        [Authorize(Roles = "Scheduler")]
+
         public async Task<IActionResult> Index()
         {
               return _context.ScheduledClassStatuses != null ? 
@@ -27,6 +32,8 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: ScheduledClassStatus/Details/5
+        [Authorize(Roles = "Scheduler")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ScheduledClassStatuses == null)
@@ -45,6 +52,8 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: ScheduledClassStatus/Create
+        [Authorize(Roles = "Scheduler")]
+
         public IActionResult Create()
         {
             return View();
@@ -55,6 +64,8 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Scheduler")]
+
         public async Task<IActionResult> Create([Bind("Scsid,Scsname")] ScheduledClassStatus scheduledClassStatus)
         {
             if (ModelState.IsValid)
@@ -67,6 +78,8 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: ScheduledClassStatus/Edit/5
+        [Authorize(Roles = "Scheduler")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ScheduledClassStatuses == null)
@@ -87,6 +100,8 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Scheduler")]
+
         public async Task<IActionResult> Edit(int id, [Bind("Scsid,Scsname")] ScheduledClassStatus scheduledClassStatus)
         {
             if (id != scheduledClassStatus.Scsid)
@@ -117,7 +132,8 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
             return View(scheduledClassStatus);
         }
 
-        // GET: ScheduledClassStatus/Delete/5
+        // GET: ScheduledClassStatus/Delete/5'
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ScheduledClassStatuses == null)

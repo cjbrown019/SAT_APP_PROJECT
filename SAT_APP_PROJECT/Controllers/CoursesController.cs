@@ -4,11 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using SAT_APP_PROJECT.DATA.EF.Models;
+using SAT_APP_PROJECT.Data;
+
 
 namespace SAT_APP_PROJECT.MVC.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class CoursesController : Controller
     {
         private readonly SATContext _context;
