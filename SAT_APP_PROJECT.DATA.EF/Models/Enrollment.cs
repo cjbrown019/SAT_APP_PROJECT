@@ -10,7 +10,7 @@ namespace SAT_APP_PROJECT.DATA.EF.Models
         public int ScheduledClassId { get; set; }
         public DateTime EnrollmentDate { get; set; }
 
-        public virtual ScheduledClass ScheduledClass { get; set; } = null!;
-        public virtual Student Student { get; set; } = null!;
+        public virtual ScheduledClass? ScheduledClass { get; set; } = null!;//deals with new form entries 
+        public virtual Student? Student { get; set; } = null!;//deals with new form entries 
     }
 }

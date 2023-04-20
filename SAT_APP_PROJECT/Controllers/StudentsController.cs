@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SAT_APP_PROJECT.DATA.EF.Models;
 using Microsoft.AspNetCore.Hosting;//added for FUP
+using System.Drawing;
+using SAT_APP_PROJECT.MVC.UI.Utilities;
 
 namespace SAT_APP_PROJECT.MVC.UI.Controllers
 {
@@ -87,16 +89,25 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
                         string fullImagePath = webRootPath + "/img/students/";
 
                         //create a MemoryStream object to read image into server memory
-                        //TODO: FINISH THIS FUNCTIONALY FOR CONTROLLER POST CREATE ACTION ON FUPload
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await student.Image.CopyToAsync(memoryStream);//transfer file to MS
 
+                            using (var img = Image.FromStream(memoryStream))//transfer that to Image type for our ImageUtility
+                            {
+                                int maxImageSize = 500;//FYI - could adjust if needed
+                                int maxThumbSize = 100;//FYI - could adjust if needed
 
-                    }
-                    else // file was incorrect ext or too big
-                    {
-                        //If no image assign the default filename
-                        student.PhotoUrl = "noimage.jpg";
-                    }
+                                ImageUtility.ResizeImage(fullImagePath, student.PhotoUrl, img, maxImageSize, maxThumbSize);
+                            }
+                        }
 
+                    }                   
+                }
+                else // file was incorrect ext or too big
+                {
+                    //If no image assign the default filename
+                    student.PhotoUrl = "noimage.jpg";
                 }
 
                 #endregion

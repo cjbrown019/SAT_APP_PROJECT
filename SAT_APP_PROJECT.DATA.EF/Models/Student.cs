@@ -23,7 +23,7 @@ namespace SAT_APP_PROJECT.DATA.EF.Models
         public string? PhotoUrl { get; set; }
         public int Ssid { get; set; }
 
-        public virtual StudentStatus Ss { get; set; } = null!;
+        public virtual StudentStatus? Ss { get; set; } = null!;//deals with new form entries 
         public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
 }
