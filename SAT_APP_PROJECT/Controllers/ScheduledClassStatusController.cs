@@ -22,7 +22,7 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: ScheduledClassStatus
-        [Authorize(Roles = "Scheduler")]
+        [Authorize(Roles = "Admin, Scheduler")]
 
         public async Task<IActionResult> Index()
         {
@@ -32,7 +32,7 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: ScheduledClassStatus/Details/5
-        [Authorize(Roles = "Scheduler")]
+        [Authorize(Roles = "Admin, Scheduler")]
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -52,7 +52,7 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: ScheduledClassStatus/Create
-        [Authorize(Roles = "Scheduler")]
+        [Authorize(Roles = "Admin, Scheduler")]
 
         public IActionResult Create()
         {
@@ -64,7 +64,7 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Scheduler")]
+        [Authorize(Roles = "Admin, Scheduler")]
 
         public async Task<IActionResult> Create([Bind("Scsid,Scsname")] ScheduledClassStatus scheduledClassStatus)
         {
@@ -78,7 +78,7 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         }
 
         // GET: ScheduledClassStatus/Edit/5
-        [Authorize(Roles = "Scheduler")]
+        [Authorize(Roles = "Admin, Scheduler")]
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -100,7 +100,7 @@ namespace SAT_APP_PROJECT.MVC.UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Scheduler")]
+        [Authorize(Roles = "Admin, Scheduler")]
 
         public async Task<IActionResult> Edit(int id, [Bind("Scsid,Scsname")] ScheduledClassStatus scheduledClassStatus)
         {

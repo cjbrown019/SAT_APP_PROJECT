@@ -8,6 +8,20 @@
     <li class="">
         <a  class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>
+    @if (User.IsInRole("Admin"))
+          {
+              <li class="dropdown">
+                  <a href="#">Admin</a>
+                  <ul>
+<li><a asp-action="ListRoles" asp-controller="Administation">List Roles</a></li>
+                  <li><a asp-action="ListUsers" asp-controller="Administation">List Users</a></li>
+                  </ul> 
+                  
+              </li>
+              
+              
+
+          }
     <li class="">
         <a>
 <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

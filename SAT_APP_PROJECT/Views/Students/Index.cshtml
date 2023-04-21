@@ -79,7 +79,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhotoUrl)
+                 <img src=$"~/img/students/t_{@Html.DisplayFor(modelItem => item.PhotoUrl)}"  />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ss.Ssname)
